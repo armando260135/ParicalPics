@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         Animation animacion1 = AnimationUtils.loadAnimation(this, R.anim.desplazamiento_arriba);
         Animation animacion2 = AnimationUtils.loadAnimation(this, R.anim.desplazamiento_abajo);
 
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         TextView wpossTexttView = findViewById(R.id.wpossTextView);
         ImageView logoImageView = findViewById(R.id.logoImageView);
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, Inicio3.class);
+                Intent intent = new Intent(MainActivity.this, login.class);
                 Pair[] pairs = new Pair[3];
                 pairs[0] = new Pair<View,String>(logoImageView,"logoImageTrans");
                 pairs[1] = new Pair<View,String>(wpossTexttView,"textTrans");

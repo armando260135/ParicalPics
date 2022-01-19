@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="rojo_ufpso">#e6282a</color>
     <color name="naranja_final_degradado">#ff5c39</color>
+    <color name="borderButton">#d7466d</color>
+
 </resources>
