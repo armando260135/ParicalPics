@@ -5,8 +5,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ public class Home extends AppCompatActivity {
     SliderAdapter adapter;
     ViewPager2 pager2;
     Drawable list[];
+    ImageView imgNotify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,7 @@ public class Home extends AppCompatActivity {
 
         listHome = new ArrayList<>();
         recyclerView = findViewById(R.id.RecyclerId);
+        imgNotify = findViewById(R.id.imgNotify);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         dotslayout = findViewById(R.id.containerPuntos);
         pager2 = findViewById(R.id.viewPager2);
@@ -42,6 +47,16 @@ public class Home extends AppCompatActivity {
                 super.onPageSelected(position);
             }
         });
+
+        imgNotify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iAdmin = new Intent(Home.this, IngresarMaterias.class);
+                startActivity(iAdmin);
+            }
+        });
+
+
 
         llenarPersonajes();
         AdapterHome adapterHome = new AdapterHome(listHome);
