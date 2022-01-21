@@ -20,7 +20,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase MyDB) {
         //creamos las dos bases de datos
         MyDB.execSQL("create Table usuarios(nombreusuario TEXT primary key, password TEXT, email TEXT, telefono TEXT)");
-
     }
 
     @Override
