@@ -8,15 +8,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Inicio3 extends AppCompatActivity {
 Button btnRegister;
+TextView tvLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio3);
      
         btnRegister=findViewById(R.id.btnRegister);
+        tvLogin = findViewById(R.id.irAlLogIn);
+        tvLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Inicio3.this, Login.class);
+                startActivity(i);
+            }
+        });
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
