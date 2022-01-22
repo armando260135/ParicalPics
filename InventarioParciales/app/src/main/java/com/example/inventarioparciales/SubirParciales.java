@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class SubirParciales extends AppCompatActivity {
     @BindView(R.id.uploadImageView)
     ImageView mUploadImageView;
     EditText editTextTextPersonName;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class SubirParciales extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef= database.getReference("user1");
         editTextTextPersonName = findViewById(R.id.editTextTextPersonName);
-
+        progressDialog = new ProgressDialog(this);
         mUploadImageView.setOnClickListener(v -> fileUpload());
     }
 
@@ -56,6 +58,11 @@ public class SubirParciales extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         String carpeta = editTextTextPersonName.getText().toString();
+        progressDialog.setTitle("Subiendo Imagen");
+        progressDialog.setMessage("Por Favor Espere un Momento");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
 
         if(requestCode == File){
 
@@ -73,6 +80,7 @@ public class SubirParciales extends AppCompatActivity {
                     HashMap<String,String> hashMap = new HashMap<>();
                     hashMap.put("link", String.valueOf(uri));
                     myRef.setValue(hashMap);
+                    progressDialog.dismiss();
 
                     Log.d("Mensaje", "Se subió correctamente");
 
