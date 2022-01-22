@@ -58,15 +58,13 @@ public class SubirParciales extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         String carpeta = editTextTextPersonName.getText().toString();
-        progressDialog.setTitle("Subiendo Imagen");
-        progressDialog.setMessage("Por Favor Espere un Momento");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-
-
+        
         if(requestCode == File){
-
             if(resultCode == RESULT_OK){
+                progressDialog.setTitle("Subiendo Imagen");
+                progressDialog.setMessage("Por Favor Espere un Momento");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
 
                 Uri FileUri = data.getData();
 
