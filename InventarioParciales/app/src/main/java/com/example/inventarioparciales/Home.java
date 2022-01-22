@@ -21,7 +21,7 @@ public class Home extends AppCompatActivity {
     SliderAdapter adapter;
     ViewPager2 pager2;
     Drawable list[];
-    ImageView imgNotify;
+    ImageView imgNotify,subirimg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,8 @@ public class Home extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         dotslayout = findViewById(R.id.containerPuntos);
         pager2 = findViewById(R.id.viewPager2);
+        subirimg = findViewById(R.id.subirImg);
+
         list = new Drawable[3];
         list[0] = getResources().getDrawable(R.drawable.bannerperfecto);
         list[1] = getResources().getDrawable(R.drawable.bannerperfecto2);
@@ -53,6 +55,14 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 Intent iAdmin = new Intent(Home.this, IngresarMaterias.class);
                 startActivity(iAdmin);
+            }
+        });
+
+        subirimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iSubirImg = new Intent(Home.this, SubirParciales.class);
+                startActivity(iSubirImg);
             }
         });
 
