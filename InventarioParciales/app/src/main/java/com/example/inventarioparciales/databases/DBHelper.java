@@ -20,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase MyDB) {
         //creamos las dos bases de datos
         MyDB.execSQL("create Table usuarios(nombreusuario TEXT primary key, password TEXT, email TEXT, telefono TEXT)");
-        MyDB.execSQL("create Table materias(codigomateria INTEGER primary key, nombremateria TEXT)");
+        MyDB.execSQL("create Table materias(codigomateria INTEGER primary key, nombremateria TEXT, codigoicono INTEGER)");
     }
 
     @Override
@@ -67,11 +67,12 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // metodo inserta los datos en la tabla materias  materias(codigomateria INTEGER primary key, nombremateria TEXT)
-    public boolean insertDataMaterias(int codigo, String nombre){
+    public boolean insertDataMaterias(int codigo, String nombre,int id){
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("codigomateria",codigo);
         cv.put("nombremateria", nombre);
+        cv.put("codigoicono",id);
 
         Long results = MyDB.insert("materias",null ,cv);
         if (results==-1){

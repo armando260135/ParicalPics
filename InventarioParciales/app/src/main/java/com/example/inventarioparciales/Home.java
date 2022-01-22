@@ -1,5 +1,6 @@
 package com.example.inventarioparciales;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,12 +12,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.example.inventarioparciales.databases.DBHelper;
-
 import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
@@ -84,10 +82,10 @@ public class Home extends AppCompatActivity {
     private void llenarPersonajes() {
         SQLiteDatabase data = DB.getWritableDatabase();
         Cursor fila = data.rawQuery(
-                "select nombremateria from materias", null);
+                "select nombremateria,codigoicono from materias", null);
         if(fila.moveToFirst()){
             do{
-                listHome.add(new MateriasHome(fila.getString(0),R.drawable.dime));
+                listHome.add(new MateriasHome(fila.getString(0),fila.getInt(1)));
             }while (fila.moveToNext());
         }
 
