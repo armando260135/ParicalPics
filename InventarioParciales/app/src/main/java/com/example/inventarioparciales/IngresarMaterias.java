@@ -2,6 +2,7 @@ package com.example.inventarioparciales;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -30,6 +31,8 @@ public class IngresarMaterias extends AppCompatActivity {
             Boolean checkMaterias = DB.insertDataMaterias(Integer.parseInt(codigo),materia);
             if (checkMaterias){
                 Toast.makeText(this, "Exito al registrar la materia", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(IngresarMaterias.this, Home.class);
+                startActivity(i);
             }else {
                 Toast.makeText(this, "Error al ingresar la materia", Toast.LENGTH_SHORT).show();
             }

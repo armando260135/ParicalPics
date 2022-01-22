@@ -6,11 +6,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.example.inventarioparciales.databases.DBHelper;
 
 import java.util.ArrayList;
 
@@ -22,12 +27,15 @@ public class Home extends AppCompatActivity {
     ViewPager2 pager2;
     Drawable list[];
     ImageView imgNotify,subirimg;
+    DBHelper DB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        DB = new DBHelper(this);
         listHome = new ArrayList<>();
         recyclerView = findViewById(R.id.RecyclerId);
         imgNotify = findViewById(R.id.imgNotify);
@@ -73,20 +81,16 @@ public class Home extends AppCompatActivity {
         recyclerView.setAdapter(adapterHome);
     }
 
-
     private void llenarPersonajes() {
-        listHome.add(new MateriasHome("Base De Datos",R.drawable.dime));
-        listHome.add(new MateriasHome("Ingenieria De Software",R.drawable.softwa));
-        listHome.add(new MateriasHome("Programacion I",R.drawable.python));
-        listHome.add(new MateriasHome("Programacion II",R.drawable.python));
-        listHome.add(new MateriasHome("Estructura De Datos",R.drawable.graphm));
-        listHome.add(new MateriasHome("Redes y Computadores",R.drawable.network));
-        listHome.add(new MateriasHome("Inteligencia Artificial",R.drawable.robot));
-        listHome.add(new MateriasHome("Tecnicas De Investigacion",R.drawable.proyec1));
-        listHome.add(new MateriasHome("Proyectos I",R.drawable.proyec1));
+        SQLiteDatabase data = DB.getWritableDatabase();
+        Cursor fila = data.rawQuery(
+                "select nombremateria from materias", null);
+        if(fila.moveToFirst()){
+            do{
+                listHome.add(new MateriasHome(fila.getString(0),R.drawable.dime));
+            }while (fila.moveToNext());
+        }
 
 
     }
-
-
 }
