@@ -23,6 +23,7 @@ public class Login extends AppCompatActivity {
         etPassword = findViewById(R.id.passwordLogin);
         DB = new DBHelper(this);
     }
+    //boton para el login de prueba 
     public void btnAccesoLogin(View v) {
        username = etUsername.getText().toString();
        password = etPassword.getText().toString();
