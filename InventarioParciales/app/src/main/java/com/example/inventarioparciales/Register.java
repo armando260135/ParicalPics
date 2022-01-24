@@ -3,6 +3,7 @@ package com.example.inventarioparciales;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -35,6 +36,7 @@ public class Register extends AppCompatActivity {
     private String userID;
     private FirebaseFirestore db;
     private Button btnRegistrarse;
+    private ProgressDialog progressDialogRegisterUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class Register extends AppCompatActivity {
         etTelephone = findViewById(R.id.phone);
         btnRegistrarse = findViewById(R.id.btnRegistrarse);
         DB = new DBHelper(this);
+        progressDialogRegisterUser = new ProgressDialog(this);
 
         //firebase
         mAuth = FirebaseAuth.getInstance();
@@ -64,19 +67,22 @@ public class Register extends AppCompatActivity {
         String phone = etTelephone.getText().toString();
 
         if (TextUtils.isEmpty(name)){
-            etEmail.setError("Ingrese un nombre");
-            etEmail.requestFocus();
+            etUsername.setError("Ingrese un nombre");
+            etUsername.requestFocus();
         }else if (TextUtils.isEmpty(password)){
-            etEmail.setError("Ingrese una contraseña");
-            etEmail.requestFocus();
+            etPassword.setError("Ingrese una contraseña");
+            etPassword.requestFocus();
         }else if (TextUtils.isEmpty(mail)){
             etEmail.setError("Ingrese un correo");
             etEmail.requestFocus();
         }else if (TextUtils.isEmpty(phone)){
-            etEmail.setError("Ingrese un telefono");
-            etEmail.requestFocus();
+            etTelephone.setError("Ingrese un telefono");
+            etTelephone.requestFocus();
         }else {
-
+            progressDialogRegisterUser.setTitle("Registrando Usuario");
+            progressDialogRegisterUser.setMessage("Por Favor Espere un Momento");
+            progressDialogRegisterUser.setCancelable(false);
+            progressDialogRegisterUser.show();
             mAuth.createUserWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -94,7 +100,7 @@ public class Register extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void unused) {
                                 Log.d("TAG","onSuccess: Datos Registrados" + userID);
-
+                                progressDialogRegisterUser.dismiss();
                             }
                         });
                         Toast.makeText(Register.this, "Usuario registrado", Toast.LENGTH_SHORT).show();
