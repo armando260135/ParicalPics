@@ -105,18 +105,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnRegistrarse"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="552dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/style_button"
+        android:onClick="btnRegistrar"
         android:text="Register"
         android:textColor="@color/borderEdit"
         android:textSize="18dp"
         android:textStyle="bold"
-        android:onClick="btnRegistrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"

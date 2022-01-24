@@ -47,7 +47,7 @@
         android:drawablePadding="10dp"
         android:drawableTint="@color/borderEdit"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Correo Electronico"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:paddingLeft="10dp"

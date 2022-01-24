@@ -79,14 +79,12 @@ public class Home extends AppCompatActivity {
             }
         });
 
-
-
-        llenarPersonajes();
+        llenarMaterias();
         AdapterHome adapterHome = new AdapterHome(listHome);
         recyclerView.setAdapter(adapterHome);
     }
 
-    private void llenarPersonajes() {
+    private void llenarMaterias() {
         SQLiteDatabase data = DB.getWritableDatabase();
         Cursor fila = data.rawQuery(
                 "select nombremateria,codigoicono from materias", null);
