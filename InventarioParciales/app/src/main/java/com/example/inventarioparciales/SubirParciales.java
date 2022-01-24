@@ -30,7 +30,7 @@ public class SubirParciales extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.uploadImageView)
     ImageView mUploadImageView;
-    EditText editTextTextPersonName;
+    EditText editTextTextImgFolder,editTextTextImgSubFolder;
     private ProgressDialog progressDialog;
 
     @Override
@@ -42,7 +42,8 @@ public class SubirParciales extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef= database.getReference("user1");
-        editTextTextPersonName = findViewById(R.id.editTextTextPersonName);
+        editTextTextImgFolder = findViewById(R.id.editTextTextImgFolder);
+        editTextTextImgSubFolder = findViewById(R.id.editTextTextImgSubFolder);
         progressDialog = new ProgressDialog(this);
         mUploadImageView.setOnClickListener(v -> fileUpload());
     }
@@ -57,7 +58,8 @@ public class SubirParciales extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String carpeta = editTextTextPersonName.getText().toString();
+        String carpeta = editTextTextImgFolder.getText().toString();
+        String subcarpeta = editTextTextImgSubFolder.getText().toString();
         
         if(requestCode == File){
             if(resultCode == RESULT_OK){
@@ -70,7 +72,9 @@ public class SubirParciales extends AppCompatActivity {
 
                 StorageReference Folder = FirebaseStorage.getInstance().getReference().child(carpeta);
 
-                final StorageReference file_name = Folder.child("file"+FileUri.getLastPathSegment());
+                StorageReference Folder2 = Folder.child(subcarpeta);
+
+                final StorageReference file_name = Folder2.child("file"+FileUri.getLastPathSegment());
 
 
                 file_name.putFile(FileUri).addOnSuccessListener(taskSnapshot -> file_name.getDownloadUrl().addOnSuccessListener(uri -> {
