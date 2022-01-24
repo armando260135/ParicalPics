@@ -30,6 +30,7 @@ TextView tvLogin;
                 startActivity(i);
             }
         });
+        // evento de escuchapara registrar
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
