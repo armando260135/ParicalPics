@@ -12,8 +12,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.example.inventarioparciales.databases.DBHelper;
 import java.util.ArrayList;
 
@@ -26,6 +29,8 @@ public class Home extends AppCompatActivity {
     Drawable list[];
     ImageView imgNotify,subirimg;
     DBHelper DB;
+    GridLayout gridMaterias;
+    TextView txtsinmaterias;
 
 
     @Override
@@ -41,6 +46,8 @@ public class Home extends AppCompatActivity {
         dotslayout = findViewById(R.id.containerPuntos);
         pager2 = findViewById(R.id.viewPager2);
         subirimg = findViewById(R.id.subirImg);
+        gridMaterias = findViewById(R.id.gridMaterias);
+        txtsinmaterias = findViewById(R.id.txtsinmaterias);
 
         list = new Drawable[3];
         list[0] = getResources().getDrawable(R.drawable.bannerperfecto);
@@ -84,11 +91,12 @@ public class Home extends AppCompatActivity {
         Cursor fila = data.rawQuery(
                 "select nombremateria,codigoicono from materias", null);
         if(fila.moveToFirst()){
+            gridMaterias.setVisibility(View.VISIBLE);
             do{
                 listHome.add(new MateriasHome(fila.getString(0),fila.getInt(1)));
             }while (fila.moveToNext());
-        }
 
-
+        }else
+            txtsinmaterias.setVisibility(View.VISIBLE);
     }
 }
