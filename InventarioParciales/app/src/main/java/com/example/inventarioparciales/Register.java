@@ -32,6 +32,7 @@ public class Register extends AppCompatActivity {
         DB = new DBHelper(this);
 
     }
+    //btn registrar
     public void btnRegistrar(View v) {
          username = etUsername.getText().toString();
          email = etEmail.getText().toString();
