@@ -105,8 +105,10 @@ public class Register extends AppCompatActivity {
                         });
                         Toast.makeText(Register.this, "Usuario registrado", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Register.this,Login.class));
-                    }else
+                    }else{
+                        progressDialogRegisterUser.dismiss();
                         Toast.makeText(Register.this, "Usuario no registrado: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
