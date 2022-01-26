@@ -3,6 +3,7 @@ package com.example.inventarioparciales;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,6 +25,7 @@ public class Login extends AppCompatActivity {
     DBHelper DB;
     private FirebaseAuth mAuth;
     private Button btnLogin;
+    private ProgressDialog progressDialogLoginUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class Login extends AppCompatActivity {
         DB = new DBHelper(this);
         mAuth = FirebaseAuth.getInstance();
         btnLogin = findViewById(R.id.btnLogin);
+        progressDialogLoginUser = new ProgressDialog(this);
 
         btnLogin.setOnClickListener(view -> {
             userLogin();
@@ -53,13 +56,20 @@ public class Login extends AppCompatActivity {
             etPassword.setError("Ingrese una contraseña");
             etPassword.requestFocus();
         }else {
+            progressDialogLoginUser.setTitle("Iniciando Seción");
+            progressDialogLoginUser.setMessage("Por Favor Espere un Momento");
+            progressDialogLoginUser.setCancelable(false);
+            progressDialogLoginUser.show();
+
             mAuth.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(Login.this, "Bienvenido", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Login.this,Home.class));
+                        progressDialogLoginUser.dismiss();
                     }else {
+                        progressDialogLoginUser.dismiss();
                         Log.w("TAG", "signInWithEmail:failure", task.getException());
                         Toast.makeText(Login.this, "Credenciales Incorrectas",
                                 Toast.LENGTH_SHORT).show();

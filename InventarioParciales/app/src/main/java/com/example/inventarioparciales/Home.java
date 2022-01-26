@@ -66,7 +66,7 @@ public class Home extends AppCompatActivity {
         imgNotify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent iAdmin = new Intent(Home.this, IngresarMaterias.class);
+                Intent iAdmin = new Intent(Home.this, VerSemestres.class);
                 startActivity(iAdmin);
             }
         });

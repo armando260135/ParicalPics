@@ -81,6 +81,11 @@ public class SubirParciales extends AppCompatActivity {
 
                     HashMap<String,String> hashMap = new HashMap<>();
                     hashMap.put("link", String.valueOf(uri));
+                    //mostrar la imagen que se acaba de subir
+//                    Glide.with(SubirParciales.this)
+//                            .load(uri)
+//                            .centerCrop()
+//                            .into(imageView);
                     myRef.setValue(hashMap);
                     progressDialog.dismiss();
 
