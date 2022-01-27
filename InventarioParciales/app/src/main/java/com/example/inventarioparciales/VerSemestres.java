@@ -1,43 +1,39 @@
 package com.example.inventarioparciales;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VerSemestres extends AppCompatActivity {
-    private Button btnsemes20201,btnsemes20202;
-    public  static String ruta="";
+    public  static String rutasemestre="";
+    private List<ListElementSemestre> elementSemestres;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_semestres);
-        btnsemes20201 = findViewById(R.id.btnSemestre20201);
-        btnsemes20202 = findViewById(R.id.btnSemestre20202);
-        ShowAllImagesFromStorage showAllImagesFromStorage = new ShowAllImagesFromStorage();
+        init();
+    }
 
-        btnsemes20201.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                showAllImagesFromStorage.verParciales("Semestre 2020-1");
-                ruta = "Semestre 2020-1";
-                Intent verParcial20201 = new Intent(VerSemestres.this,ShowAllImagesFromStorage.class);
-                startActivity(verParcial20201);
-            }
-        });
+    public void init(){
+        elementSemestres = new ArrayList<>();
+        elementSemestres.add(new ListElementSemestre("Semestre 2022-1","base de datos","Ver"));
+        elementSemestres.add(new ListElementSemestre("Semestre 2022-2","base de datos","Ver"));
+        elementSemestres.add(new ListElementSemestre("Semestre 2021-1","base de datos","Ver"));
+        elementSemestres.add(new ListElementSemestre("Semestre 2021-2","base de datos","Ver"));
+        elementSemestres.add(new ListElementSemestre("Semestre 2020-1","base de datos","Ver"));
+        elementSemestres.add(new ListElementSemestre("Semestre 2020-2","base de datos","Ver"));
 
-        btnsemes20202.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                showAllImagesFromStorage.verParciales("Semestre 2020-2");
-                ruta = "Semestre 2020-2";
-                Intent verParcial20202 = new Intent(VerSemestres.this,ShowAllImagesFromStorage.class);
-                startActivity(verParcial20202);
-            }
-        });
+        AdapterListSemestre adapterListSemestre = new AdapterListSemestre(elementSemestres,this);
+        RecyclerView recyclerView = findViewById(R.id.recyclerSemestre);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapterListSemestre);
     }
 }

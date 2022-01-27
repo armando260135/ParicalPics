@@ -21,4 +21,14 @@
         android:layout_gravity="center"
         android:indeterminate="true"/>
 
+    <TextView
+        android:id="@+id/txtSinParciales"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="NO EXISTEN ARCHIVOS PARA ESTE SEMESTRE"
+        android:textSize="27dp"
+        android:gravity="center"
+        android:fontFamily="@font/typo_round_bold_demo"
+        android:visibility="gone"/>
+
 </FrameLayout>
