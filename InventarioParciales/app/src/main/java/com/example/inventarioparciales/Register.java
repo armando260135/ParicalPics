@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.inventarioparciales.databases.DBHelper;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -29,7 +29,6 @@ public class Register extends AppCompatActivity {
     etPassword,
     etEmail,
     etTelephone;
-    DBHelper DB;
 
     //firebase register
     private FirebaseAuth mAuth;
@@ -47,7 +46,6 @@ public class Register extends AppCompatActivity {
         etEmail = findViewById(R.id.email);
         etTelephone = findViewById(R.id.phone);
         btnRegistrarse = findViewById(R.id.btnRegistrarse);
-        DB = new DBHelper(this);
         progressDialogRegisterUser = new ProgressDialog(this);
 
         //firebase

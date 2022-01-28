@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.inventarioparciales.databases.DBHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,7 +21,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
     EditText etUsername, etPassword;
-    DBHelper DB;
     private FirebaseAuth mAuth;
     private Button btnLogin;
     private ProgressDialog progressDialogLoginUser;
@@ -33,7 +31,6 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         etUsername = findViewById(R.id.userameLogin);
         etPassword = findViewById(R.id.passwordLogin);
-        DB = new DBHelper(this);
         mAuth = FirebaseAuth.getInstance();
         btnLogin = findViewById(R.id.btnLogin);
         progressDialogLoginUser = new ProgressDialog(this);

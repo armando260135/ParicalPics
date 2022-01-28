@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.inventarioparciales.databases.DBHelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +33,6 @@ public class Home extends AppCompatActivity {
     ViewPager2 pager2;
     Drawable list[];
     ImageView imgNotify,subirimg;
-    DBHelper DB;
     GridLayout gridMaterias;
     TextView txtsinmaterias;
 
@@ -44,7 +42,7 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        DB = new DBHelper(this);
+
         listHome = new ArrayList<>();
         recyclerView = findViewById(R.id.RecyclerId);
         imgNotify = findViewById(R.id.imgNotify);
