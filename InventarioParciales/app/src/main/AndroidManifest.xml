@@ -19,10 +19,6 @@
             android:name=".ShowAllImagesFromStorage"
             android:exported="false" />
         <activity
-            android:name=".SubirParciales"
-            android:exported="false"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".Register"
             android:exported="false"
             android:screenOrientation="portrait"/>

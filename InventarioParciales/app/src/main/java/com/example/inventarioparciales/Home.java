@@ -70,7 +70,7 @@ public class Home extends AppCompatActivity {
         subirimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent iSubirImg = new Intent(Home.this, SubirParciales.class);
+                Intent iSubirImg = new Intent(Home.this, VerSemestres.class);
                 startActivity(iSubirImg);
             }
         });
