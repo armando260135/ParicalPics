@@ -1,14 +1,13 @@
 package com.example.inventarioparciales;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -16,8 +15,15 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.inventarioparciales.databases.DBHelper;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
@@ -63,14 +69,6 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        imgNotify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent iAdmin = new Intent(Home.this, VerSemestres.class);
-                startActivity(iAdmin);
-            }
-        });
-
         subirimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,21 +78,39 @@ public class Home extends AppCompatActivity {
         });
 
         llenarMaterias();
-        AdapterHome adapterHome = new AdapterHome(listHome);
-        recyclerView.setAdapter(adapterHome);
     }
 
     private void llenarMaterias() {
-        SQLiteDatabase data = DB.getWritableDatabase();
-        Cursor fila = data.rawQuery(
-                "select nombremateria,codigoicono from materias", null);
-        if(fila.moveToFirst()){
-            gridMaterias.setVisibility(View.VISIBLE);
-            do{
-                listHome.add(new MateriasHome(fila.getString(0),fila.getInt(1)));
-            }while (fila.moveToNext());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        reference.child("Asignaturas").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-        }else
-            txtsinmaterias.setVisibility(View.VISIBLE);
+                if (snapshot.exists()) {
+                    listHome.clear();
+                    for (DataSnapshot sn : snapshot.getChildren()) {
+                        if (sn == null) {
+                            txtsinmaterias.setVisibility(View.VISIBLE);
+                        } else {
+                            gridMaterias.setVisibility(View.VISIBLE);
+                            String nombre = sn.child("nombre").getValue().toString();
+                            int icon = Integer.parseInt(sn.child("foto").getValue().toString());
+                            String codigo = sn.child("codigo").getValue().toString();
+                            listHome.add(new MateriasHome(nombre, icon, codigo));
+                            AdapterHome adapterHome = new AdapterHome(listHome);
+                            recyclerView.setAdapter(adapterHome);
+                        }
+                    }
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "ERROR: no existe la base de datos", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "sin ijuemadre conexion con la bd" + error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

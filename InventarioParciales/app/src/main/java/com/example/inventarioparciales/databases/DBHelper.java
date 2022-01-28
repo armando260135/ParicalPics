@@ -1,3 +1,4 @@
+/*
 package com.example.inventarioparciales.databases;
 
 import static com.example.inventarioparciales.Utils.DB_NAME;
@@ -82,3 +83,4 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 }
+*/

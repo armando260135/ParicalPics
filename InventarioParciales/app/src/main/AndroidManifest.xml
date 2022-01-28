@@ -23,10 +23,6 @@
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".IngresarMaterias"
-            android:exported="false"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".Register"
             android:exported="false"
             android:screenOrientation="portrait"/>
