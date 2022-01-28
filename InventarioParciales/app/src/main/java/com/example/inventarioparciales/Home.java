@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -35,14 +36,14 @@ public class Home extends AppCompatActivity {
     ImageView imgNotify,subirimg;
     GridLayout gridMaterias;
     TextView txtsinmaterias;
-
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
+        progressDialog = new ProgressDialog(this);
         listHome = new ArrayList<>();
         recyclerView = findViewById(R.id.RecyclerId);
         imgNotify = findViewById(R.id.imgNotify);
@@ -52,6 +53,7 @@ public class Home extends AppCompatActivity {
         subirimg = findViewById(R.id.subirImg);
         gridMaterias = findViewById(R.id.gridMaterias);
         txtsinmaterias = findViewById(R.id.txtsinmaterias);
+
 
         list = new Drawable[3];
         list[0] = getResources().getDrawable(R.drawable.bannerperfecto);
@@ -80,10 +82,13 @@ public class Home extends AppCompatActivity {
 
     private void llenarMaterias() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        progressDialog.setTitle("Cargando Materias");
+        progressDialog.setMessage("Por Favor Espere un Momento");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         reference.child("Asignaturas").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 if (snapshot.exists()) {
                     listHome.clear();
                     for (DataSnapshot sn : snapshot.getChildren()) {
@@ -100,10 +105,12 @@ public class Home extends AppCompatActivity {
                             listHome.add(new MateriasHome(nombre, icon, codigo));
                             AdapterHome adapterHome = new AdapterHome(listHome);
                             recyclerView.setAdapter(adapterHome);
+                            progressDialog.dismiss();
                         }
                     }
 
                 } else {
+                    progressDialog.dismiss();
                     listHome.clear();
                     recyclerView.setVisibility(View.GONE);
                     txtsinmaterias.setVisibility(View.VISIBLE);
