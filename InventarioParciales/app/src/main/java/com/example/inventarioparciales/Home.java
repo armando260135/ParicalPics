@@ -89,7 +89,10 @@ public class Home extends AppCompatActivity {
                     for (DataSnapshot sn : snapshot.getChildren()) {
                         if (sn == null) {
                             txtsinmaterias.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
                         } else {
+                            txtsinmaterias.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
                             gridMaterias.setVisibility(View.VISIBLE);
                             String nombre = sn.child("nombre").getValue().toString();
                             int icon = Integer.parseInt(sn.child("foto").getValue().toString());
@@ -101,7 +104,9 @@ public class Home extends AppCompatActivity {
                     }
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "ERROR: no existe la base de datos", Toast.LENGTH_SHORT).show();
+                    listHome.clear();
+                    recyclerView.setVisibility(View.GONE);
+                    txtsinmaterias.setVisibility(View.VISIBLE);
                 }
             }
 
