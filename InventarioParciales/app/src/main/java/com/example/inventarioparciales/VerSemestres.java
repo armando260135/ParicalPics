@@ -32,7 +32,7 @@ public class VerSemestres extends AppCompatActivity {
         elementSemestres.add(new ListElementSemestre("Semestre 2020-1","base de datos","Ver"));
         elementSemestres.add(new ListElementSemestre("Semestre 2020-2","base de datos","Ver"));
 
-        AdapterListSemestre adapterListSemestre = new AdapterListSemestre(elementSemestres,this);
+        AdapterListSemestre adapterListSemestre = new AdapterListSemestre(elementSemestres,this, materia);
         RecyclerView recyclerView = findViewById(R.id.recyclerSemestre);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

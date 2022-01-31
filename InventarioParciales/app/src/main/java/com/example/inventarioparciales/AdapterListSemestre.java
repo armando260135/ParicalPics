@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,11 +21,13 @@ public class AdapterListSemestre extends RecyclerView.Adapter<AdapterListSemestr
     private List<ListElementSemestre> semestresdata;
     private LayoutInflater semestreinflater;
     private Context context;
+    private String materia;
 
-    public AdapterListSemestre(List<ListElementSemestre> itemList, Context context) {
+    public AdapterListSemestre(List<ListElementSemestre> itemList, Context context, String materia) {
         this.semestresdata = itemList;
         this.context = context;
         this.semestreinflater = LayoutInflater.from(context);
+        this.materia= materia;
     }
 
     @NonNull
@@ -41,6 +45,7 @@ public class AdapterListSemestre extends RecyclerView.Adapter<AdapterListSemestr
         holder.itemView.setOnClickListener(view -> {
             Intent datosSemestreClick = new Intent( context, ShowAllImagesFromStorage.class);
             datosSemestreClick.putExtra("semestreClick",semestre);
+            datosSemestreClick.putExtra("materiaClick",materia);
             context.startActivity(datosSemestreClick);
         });
     }

@@ -30,7 +30,7 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
     ProgressBar progressBar;
     ImageAdapter adapter;
     TextView txtsinparciales;
-
+    private String materiaSelect;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +43,10 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
         progressBar=findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
         txtsinparciales = findViewById(R.id.txtSinParciales);
+        materiaSelect = getIntent().getStringExtra("materiaClick");
         obtenerSemestre();
 
-        String formarruta = "/Base De Datos/"+rutasemestre;
+        String formarruta = "/"+materiaSelect+"/"+rutasemestre;
 
         StorageReference listRef = FirebaseStorage.getInstance().getReference().child(formarruta);
         listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
