@@ -12,12 +12,14 @@ import java.util.List;
 public class VerSemestres extends AppCompatActivity {
     public  static String rutasemestre="";
     private List<ListElementSemestre> elementSemestres;
+    private String materia;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_semestres);
+        materia = getIntent().getStringExtra("Materia");
         init();
     }
 

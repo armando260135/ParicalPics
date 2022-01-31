@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -35,9 +36,9 @@ public class Home extends AppCompatActivity {
     Drawable list[];
     ImageView imgNotify,subirimg;
     GridLayout gridMaterias;
-    TextView txtsinmaterias;
+    TextView txtsinmaterias,tvusername;
     private ProgressDialog progressDialog;
-
+    String nombreUsuario="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,13 +54,11 @@ public class Home extends AppCompatActivity {
         subirimg = findViewById(R.id.subirImg);
         gridMaterias = findViewById(R.id.gridMaterias);
         txtsinmaterias = findViewById(R.id.txtsinmaterias);
-
-
+        tvusername = findViewById(R.id.tvHomeUsername);
         list = new Drawable[3];
         list[0] = getResources().getDrawable(R.drawable.bannerperfecto);
         list[1] = getResources().getDrawable(R.drawable.bannerperfecto2);
         list[2] = getResources().getDrawable(R.drawable.bannerperfecto3);
-
         adapter = new SliderAdapter(list);
         pager2.setAdapter(adapter);
         pager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -76,7 +75,8 @@ public class Home extends AppCompatActivity {
                 startActivity(iSubirImg);
             }
         });
-
+        nombreUsuario = getIntent().getStringExtra("nombre").toUpperCase();
+        tvusername.setText(nombreUsuario);
         llenarMaterias();
     }
 
@@ -103,7 +103,7 @@ public class Home extends AppCompatActivity {
                             int icon = Integer.parseInt(sn.child("foto").getValue().toString());
                             String codigo = sn.child("codigo").getValue().toString();
                             listHome.add(new MateriasHome(nombre, icon, codigo));
-                            AdapterHome adapterHome = new AdapterHome(listHome);
+                            AdapterHome adapterHome = new AdapterHome(listHome, Home.this);
                             recyclerView.setAdapter(adapterHome);
                             progressDialog.dismiss();
                         }

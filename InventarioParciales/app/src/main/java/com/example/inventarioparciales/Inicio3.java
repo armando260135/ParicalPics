@@ -42,6 +42,7 @@ TextView tvLogin;
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Inicio3.this, Home.class);
+                i.putExtra("nombre", "invitado");
                 startActivity(i);
             }
         });

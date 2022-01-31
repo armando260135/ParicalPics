@@ -36,7 +36,6 @@ public class AdapterListSemestre extends RecyclerView.Adapter<AdapterListSemestr
     @Override
     public void onBindViewHolder(@NonNull AdapterListSemestre.ViewHolderSemestre holder, int position) {
         rutasemestre = "";
-        holder.binData(semestresdata.get(position));
         ListElementSemestre listElementSemestre = semestresdata.get(position);
         String semestre = listElementSemestre.getSemestre();
         holder.itemView.setOnClickListener(view -> {
