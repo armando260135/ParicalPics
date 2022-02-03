@@ -22,12 +22,14 @@ public class AdapterListSemestre extends RecyclerView.Adapter<AdapterListSemestr
     private LayoutInflater semestreinflater;
     private Context context;
     private String materia;
+    private String examen;
 
-    public AdapterListSemestre(List<ListElementSemestre> itemList, Context context, String materia) {
+    public AdapterListSemestre(List<ListElementSemestre> itemList, Context context, String materia,String examen) {
         this.semestresdata = itemList;
         this.context = context;
         this.semestreinflater = LayoutInflater.from(context);
-        this.materia= materia;
+        this.materia = materia;
+        this.examen = examen;
     }
 
     @NonNull
@@ -41,11 +43,13 @@ public class AdapterListSemestre extends RecyclerView.Adapter<AdapterListSemestr
     public void onBindViewHolder(@NonNull AdapterListSemestre.ViewHolderSemestre holder, int position) {
         rutasemestre = "";
         ListElementSemestre listElementSemestre = semestresdata.get(position);
+        holder.binData(semestresdata.get(position));
         String semestre = listElementSemestre.getSemestre();
         holder.itemView.setOnClickListener(view -> {
             Intent datosSemestreClick = new Intent( context, ShowAllImagesFromStorage.class);
             datosSemestreClick.putExtra("semestreClick",semestre);
             datosSemestreClick.putExtra("materiaClick",materia);
+            datosSemestreClick.putExtra("examenClick",examen);
             context.startActivity(datosSemestreClick);
         });
     }

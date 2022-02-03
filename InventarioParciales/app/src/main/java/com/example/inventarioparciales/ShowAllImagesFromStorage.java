@@ -31,6 +31,7 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
     ImageAdapter adapter;
     TextView txtsinparciales;
     private String materiaSelect;
+    private String examenSelect;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +45,11 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         txtsinparciales = findViewById(R.id.txtSinParciales);
         materiaSelect = getIntent().getStringExtra("materiaClick");
-        obtenerSemestre();
+        examenSelect = getIntent().getStringExtra("examenClick");
+        obtenerSemestre(examenSelect);
 
         String formarruta = "/"+materiaSelect+"/"+rutasemestre;
-
+        Toast.makeText(this, formarruta, Toast.LENGTH_SHORT).show();
         StorageReference listRef = FirebaseStorage.getInstance().getReference().child(formarruta);
         listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
             @Override
@@ -79,27 +81,27 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
         });
     }
 
-    public void obtenerSemestre(){
+    public void obtenerSemestre(String examenSelect){
         String semestrepulsado = getIntent().getStringExtra("semestreClick");
 
         switch (semestrepulsado){
             case "Semestre 2022-1":
-                rutasemestre = "Semestre 2022-1";
+                rutasemestre = "Semestre 2022 - 1/"+examenSelect;
                 break;
             case "Semestre 2022-2":
-                rutasemestre = "Semestre 2022-2";
+                rutasemestre = "Semestre 2022 - 2/"+examenSelect;
                 break;
             case "Semestre 2021-1":
-                rutasemestre = "Semestre 2021-1";
+                rutasemestre = "Semestre 2021 - 1/"+examenSelect;
                 break;
             case "Semestre 2021-2":
-                rutasemestre = "Semestre 2021-2";
+                rutasemestre = "Semestre 2021 - 2/"+examenSelect;
                 break;
             case "Semestre 2020-1":
-                rutasemestre = "Semestre 2020-1";
+                rutasemestre = "Semestre 2020 - 1/"+examenSelect;
                 break;
             case "Semestre 2020-2":
-                rutasemestre = "Semestre 2020-2";
+                rutasemestre = "Semestre 2020 - 2/"+examenSelect;
                 break;
             default:
                 rutasemestre="";
