@@ -17,12 +17,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     private ArrayList<String> imageList;
 
-    public ImageAdapter(ArrayList<String> imageList, Context context) {
+    public ImageAdapter(ArrayList<String> imageList) {
         this.imageList = imageList;
-        this.context = context;
     }
 
-    private Context context;
+
     @NonNull
     @Override
     public ImageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,10 +41,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        View view;
         ImageView imageView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.item);
+            view = itemView.findViewById(R.id.view1);
+            imageView=itemView.findViewById(R.id.imageParcial);
         }
     }
 }

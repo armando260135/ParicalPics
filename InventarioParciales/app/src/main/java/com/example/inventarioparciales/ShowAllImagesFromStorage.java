@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 public class ShowAllImagesFromStorage extends AppCompatActivity {
 
     ArrayList<String> imagelist;
+    ViewPager2 viewPager2;
     RecyclerView recyclerView;
     ProgressBar progressBar;
     ImageAdapter adapter;
@@ -37,16 +39,25 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_images_from_storage);
-        imagelist=new ArrayList<>();
-        recyclerView=findViewById(R.id.recyclerview);
-        adapter=new ImageAdapter(imagelist,this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(null));
-        progressBar=findViewById(R.id.progress);
-        progressBar.setVisibility(View.VISIBLE);
-        txtsinparciales = findViewById(R.id.txtSinParciales);
+        imagelist = new ArrayList<>();
+        /*recyclerView=findViewById(R.id.recyclerview);*/
+        /*recyclerView.setLayoutManager(new LinearLayoutManager(null));*/
+        viewPager2 = findViewById(R.id.viewPagerParciales);
+       /* progressBar=findViewById(R.id.progress);*/
+       /* progressBar.setVisibility(View.VISIBLE);*/
+       /* txtsinparciales = findViewById(R.id.txtSinParciales);*/
         materiaSelect = getIntent().getStringExtra("materiaClick");
         examenSelect = getIntent().getStringExtra("examenClick");
         obtenerSemestre(examenSelect);
+        consulta();
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+            }
+        });
+    }
+    public void consulta(){
 
         String formarruta = "/"+materiaSelect+"/"+rutasemestre;
         Toast.makeText(this, formarruta, Toast.LENGTH_SHORT).show();
@@ -62,20 +73,22 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
                                 if (uri != null) {
                                     imagelist.add(uri.toString());
                                     Log.e("Itemvalue", uri.toString());
+                                    adapter=new ImageAdapter(imagelist);
+                                    viewPager2.setAdapter(adapter);
                                 } else
                                     Log.e("URI Vacia", uri.toString());
                             }
                         }).addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                recyclerView.setAdapter(adapter);
-                                progressBar.setVisibility(View.GONE);
+                                /* recyclerView.setAdapter(adapter);*/
+                                /*progressBar.setVisibility(View.GONE);*/
                             }
                         });
                     }
                 }else {
-                    progressBar.setVisibility(View.GONE);
-                    txtsinparciales.setVisibility(View.VISIBLE);
+                   /* progressBar.setVisibility(View.GONE);
+                    txtsinparciales.setVisibility(View.VISIBLE);*/
                 }
             }
         });
