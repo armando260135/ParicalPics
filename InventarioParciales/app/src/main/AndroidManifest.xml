@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".Perfil"
+            android:exported="false" />
+        <activity
             android:name=".VerSemestres"
             android:exported="false" />
         <activity

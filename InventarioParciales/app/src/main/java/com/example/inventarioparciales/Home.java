@@ -34,7 +34,7 @@ public class Home extends AppCompatActivity {
     SliderAdapter adapter;
     ViewPager2 pager2;
     Drawable list[];
-    ImageView imgNotify,subirimg;
+    ImageView imgNotify,iconprofile;
     GridLayout gridMaterias;
     TextView txtsinmaterias,tvusername;
     private ProgressDialog progressDialog;
@@ -51,7 +51,7 @@ public class Home extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         dotslayout = findViewById(R.id.containerPuntos);
         pager2 = findViewById(R.id.viewPager2);
-        subirimg = findViewById(R.id.subirImg);
+        iconprofile = findViewById(R.id.profile);
         gridMaterias = findViewById(R.id.gridMaterias);
         txtsinmaterias = findViewById(R.id.txtsinmaterias);
         tvusername = findViewById(R.id.tvHomeUsername);
@@ -68,10 +68,10 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        subirimg.setOnClickListener(new View.OnClickListener() {
+        iconprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent iSubirImg = new Intent(Home.this, VerSemestres.class);
+                Intent iSubirImg = new Intent(Home.this, Perfil.class);
                 startActivity(iSubirImg);
             }
         });
