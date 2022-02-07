@@ -7,15 +7,25 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +50,8 @@ public class Home extends AppCompatActivity {
     private ProgressDialog progressDialog;
     String nombreUsuario="";
     String correo = "";
+    Network network = new Network();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +95,31 @@ public class Home extends AppCompatActivity {
         });
 
         llenarMaterias();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (network.isOnlineNet())
+            Log.e("accInternet",   Boolean.toString(network.isOnlineNet()));
+        else{
+            progressDialog.dismiss();
+            toast();
+            Log.e("accInternet",   Boolean.toString(network.isOnlineNet()));
+        }
+    }
+
+    public void toast() {
+        final RelativeLayout relativeLayout = findViewById(R.id.msgAccount);
+        relativeLayout.setVisibility(View.VISIBLE);
+        Button btnEntentido = findViewById(R.id.entendidoMsg);
+
+        relativeLayout.setOnClickListener(v -> {
+            //nothing
+        });
+        btnEntentido.setOnClickListener(v ->{
+            relativeLayout.setVisibility(View.INVISIBLE);
+        });
     }
 
     private void llenarMaterias() {
