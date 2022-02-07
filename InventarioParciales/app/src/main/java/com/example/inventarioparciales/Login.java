@@ -89,8 +89,9 @@ public class Login extends AppCompatActivity {
            @Override
            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                for(QueryDocumentSnapshot doc : queryDocumentSnapshots){
-                   Intent intent = new Intent(Login.this,Home .class);
+                   Intent intent = new Intent(Login.this, Home .class);
                    intent.putExtra("nombre", doc.getString("Nombre"));
+                   intent.putExtra("correo", doc.getString("Correo"));
                    startActivity(intent);
                }
            }

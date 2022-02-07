@@ -39,6 +39,7 @@ public class Home extends AppCompatActivity {
     TextView txtsinmaterias,tvusername;
     private ProgressDialog progressDialog;
     String nombreUsuario="";
+    String correo = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,16 +68,20 @@ public class Home extends AppCompatActivity {
                 super.onPageSelected(position);
             }
         });
+        correo = getIntent().getStringExtra("correo");
+        nombreUsuario = getIntent().getStringExtra("nombre").toUpperCase();
+        tvusername.setText(nombreUsuario);
 
         iconprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent iSubirImg = new Intent(Home.this, Perfil.class);
+                iSubirImg.putExtra("nombre_perfil",nombreUsuario);
+                iSubirImg.putExtra("correo_perfil",correo);
                 startActivity(iSubirImg);
             }
         });
-        nombreUsuario = getIntent().getStringExtra("nombre").toUpperCase();
-        tvusername.setText(nombreUsuario);
+
         llenarMaterias();
     }
 

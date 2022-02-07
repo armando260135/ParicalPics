@@ -43,6 +43,7 @@ TextView tvLogin;
             public void onClick(View view) {
                 Intent i = new Intent(Inicio3.this, Home.class);
                 i.putExtra("nombre", "invitado");
+                i.putExtra("correo","invitado@gmail.com");
                 startActivity(i);
             }
         });
