@@ -3,18 +3,28 @@ package com.example.inventarioparciales;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,11 +39,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -94,19 +108,25 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        imgNotify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
         llenarMaterias();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (network.isOnlineNet())
-            Log.e("accInternet",   Boolean.toString(network.isOnlineNet()));
-        else{
-            progressDialog.dismiss();
-            toast();
-            Log.e("accInternet",   Boolean.toString(network.isOnlineNet()));
-        }
+//        if (network.isOnlineNet())
+//            Log.e("accInternet",   Boolean.toString(network.isOnlineNet()));
+//        else{
+//            progressDialog.dismiss();
+//            toast();
+//            Log.e("accInternet",   Boolean.toString(network.isOnlineNet()));
+//        }
     }
 
     public void toast() {
