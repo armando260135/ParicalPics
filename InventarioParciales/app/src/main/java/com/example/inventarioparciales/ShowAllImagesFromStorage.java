@@ -56,6 +56,7 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
         /*recyclerView=findViewById(R.id.recyclerview);*/
         /*recyclerView.setLayoutManager(new LinearLayoutManager(null));*/
         viewPager2 = findViewById(R.id.viewPagerParciales);
+
        /* progressBar=findViewById(R.id.progress);*/
        /* progressBar.setVisibility(View.VISIBLE);*/
        /* txtsinparciales = findViewById(R.id.txtSinParciales);*/

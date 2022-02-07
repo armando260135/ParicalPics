@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.jsibbold.zoomage.ZoomageView;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ImageAdapter.ViewHolder holder, int position) {
         // loading the images from the position
-        Glide.with(holder.itemView.getContext()).load(imageList.get(position)).into(holder.imageView);
+        Glide.with(holder.itemView.getContext()).load(imageList.get(position)).into(holder.zoomageView);
     }
 
     @Override
@@ -42,11 +43,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View view;
+        ZoomageView zoomageView;
         ImageView imageView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView.findViewById(R.id.view1);
-            imageView=itemView.findViewById(R.id.imageParcial);
+            zoomageView=itemView.findViewById(R.id.imageParcial);
         }
     }
 }
