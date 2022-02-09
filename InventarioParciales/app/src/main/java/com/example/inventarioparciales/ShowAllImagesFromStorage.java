@@ -46,6 +46,7 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
     private String examenSelect;
     private static final short REQUEST_CODE = 6545;
     public static String NAME_FILE = "";
+    ProgressBar progressBarImagen;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
         /*recyclerView=findViewById(R.id.recyclerview);*/
         /*recyclerView.setLayoutManager(new LinearLayoutManager(null));*/
         viewPager2 = findViewById(R.id.viewPagerParciales);
+        progressBarImagen = findViewById(R.id.progress_imagenes);
 
        /* progressBar=findViewById(R.id.progress);*/
        /* progressBar.setVisibility(View.VISIBLE);*/
@@ -82,7 +84,6 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
 
         String formarruta = "/"+materiaSelect+"/"+rutasemestre;
         NAME_FILE = formarruta+".jpg";
-        Toast.makeText(this, formarruta, Toast.LENGTH_SHORT).show();
         StorageReference listRef = FirebaseStorage.getInstance().getReference().child(formarruta);
         listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
             @Override
@@ -103,6 +104,7 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
                         }).addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
+                                progressBarImagen.setVisibility(View.GONE);
                                 /* recyclerView.setAdapter(adapter);*/
                                 /*progressBar.setVisibility(View.GONE);*/
                             }
@@ -190,7 +192,7 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if(DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)){
-                Toast.makeText(context,"Download completed", Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"Descarga Exitosa", Toast.LENGTH_LONG).show();
                 // DO SOMETHING WITH THIS FILE
             }
         }

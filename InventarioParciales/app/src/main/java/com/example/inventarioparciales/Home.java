@@ -118,12 +118,7 @@ public class Home extends AppCompatActivity {
         });
         recyclerView.setVisibility(View.VISIBLE);
         gridMaterias.setVisibility(View.VISIBLE);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                llenarMaterias();
-            }
-        }, 3000);
+        llenarMaterias();
     }
 
     @Override

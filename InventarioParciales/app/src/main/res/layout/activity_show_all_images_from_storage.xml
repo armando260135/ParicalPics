@@ -27,13 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent">
-
-        </androidx.appcompat.widget.Toolbar>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="Acá podrás  ver la previsualizacion de una parte del examen parcial solicitado, para mas información ejecute el botón para descargar el archivo del parcial completo"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:fontFamily="@font/typo_round_bold_demo"
             android:layout_marginLeft="20dp"
@@ -93,6 +86,16 @@
                         android:layout_marginEnd="5dp" />
                 </RelativeLayout>
             </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_imagenes"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminateDuration="@android:integer/config_longAnimTime"
+                android:indeterminateDrawable="@drawable/progressbar_style"
+                android:layout_gravity="center"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
