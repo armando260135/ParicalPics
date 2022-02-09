@@ -111,5 +111,12 @@ public class Register extends AppCompatActivity {
             });
         }
     }
+
+    /*@Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(Register.this,Inicio3.class);
+        i.putExtra("estado_boton", true);
+    }*/
 }
 

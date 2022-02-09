@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class Inicio3 extends AppCompatActivity {
 Button btnRegister,btnInvited;
 TextView tvLogin;
+boolean estadoBotones;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,8 @@ TextView tvLogin;
         btnRegister=findViewById(R.id.btnRegister);
         tvLogin = findViewById(R.id.irAlLogIn);
         btnInvited = findViewById(R.id.btnInvited);
+       /* estadoBotones = getIntent().getBooleanExtra("estado_boton", false);*/
+
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,6 +39,7 @@ TextView tvLogin;
             public void onClick(View view) {
                 Intent i = new Intent(Inicio3.this, Register.class);
                 startActivity(i);
+               /* btnRegister.setEnabled(estadoBotones);*/
             }
         });
         btnInvited.setOnClickListener(new View.OnClickListener() {

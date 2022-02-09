@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,6 +36,7 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +52,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Home extends AppCompatActivity {
     ArrayList<MateriasHome> listHome;
@@ -61,7 +65,7 @@ public class Home extends AppCompatActivity {
     ImageView imgNotify,iconprofile;
     GridLayout gridMaterias;
     TextView txtsinmaterias,tvusername;
-    private ProgressDialog progressDialog;
+    private ProgressBar progressBar;
     String nombreUsuario="";
     String correo = "";
     Network network = new Network();
@@ -70,8 +74,7 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        progressDialog = new ProgressDialog(this);
+        progressBar = findViewById(R.id.progress_materias);
         listHome = new ArrayList<>();
         recyclerView = findViewById(R.id.RecyclerId);
         imgNotify = findViewById(R.id.imgNotify);
@@ -113,8 +116,14 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
             }
         });
-
-        llenarMaterias();
+        recyclerView.setVisibility(View.VISIBLE);
+        gridMaterias.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                llenarMaterias();
+            }
+        }, 3000);
     }
 
     @Override
@@ -144,10 +153,6 @@ public class Home extends AppCompatActivity {
 
     private void llenarMaterias() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        progressDialog.setTitle("Cargando Materias");
-        progressDialog.setMessage("Por Favor Espere un Momento");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
         reference.child("Asignaturas").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -167,12 +172,11 @@ public class Home extends AppCompatActivity {
                             listHome.add(new MateriasHome(nombre, icon, codigo));
                             AdapterHome adapterHome = new AdapterHome(listHome, Home.this);
                             recyclerView.setAdapter(adapterHome);
-                            progressDialog.dismiss();
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
 
                 } else {
-                    progressDialog.dismiss();
                     listHome.clear();
                     recyclerView.setVisibility(View.GONE);
                     txtsinmaterias.setVisibility(View.VISIBLE);
@@ -181,7 +185,7 @@ public class Home extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(), "sin ijuemadre conexion con la bd" + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "sin ijueadre conexion con la bd" + error, Toast.LENGTH_SHORT).show();
             }
         });
     }

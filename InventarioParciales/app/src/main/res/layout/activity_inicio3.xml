@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Inicio3"
-    android:background="@drawable/bg_inicio_dreg">
+    android:background="@drawable/bg_inicio_dreg"
+    android:splitMotionEvents="false">
 
     <ImageView
         android:id="@+id/logoImageView"
@@ -53,6 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:clickable="true"
         android:layout_marginTop="124dp"
         android:background="@drawable/btn_style_invitado"
         android:drawableLeft="@drawable/icon_invitado"
@@ -77,6 +79,7 @@
         android:background="@drawable/btn_style_invitado"
         android:drawableLeft="@drawable/icon_registrarse"
         android:drawableTint="@color/black"
+        android:enabled="true"
         android:gravity="center|left"
         android:paddingStart="30dp"
         android:drawablePadding="10dp"
