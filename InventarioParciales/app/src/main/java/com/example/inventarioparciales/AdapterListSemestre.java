@@ -4,6 +4,7 @@ import static com.example.inventarioparciales.VerSemestres.rutasemestre;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class AdapterListSemestre extends RecyclerView.Adapter<AdapterListSemestr
     private Context context;
     private String materia;
     private String examen;
+    private long ultimoClick= 0;
 
     public AdapterListSemestre(List<ListElementSemestre> itemList, Context context, String materia,String examen) {
         this.semestresdata = itemList;
@@ -46,6 +48,10 @@ public class AdapterListSemestre extends RecyclerView.Adapter<AdapterListSemestr
         holder.binData(semestresdata.get(position));
         String semestre = listElementSemestre.getSemestre();
         holder.itemView.setOnClickListener(view -> {
+            if (SystemClock.elapsedRealtime() - ultimoClick < 1000){
+                return;
+            }
+            ultimoClick= SystemClock.elapsedRealtime();
             Intent datosSemestreClick = new Intent( context, ShowAllImagesFromStorage.class);
             datosSemestreClick.putExtra("semestreClick",semestre);
             datosSemestreClick.putExtra("materiaClick",materia);

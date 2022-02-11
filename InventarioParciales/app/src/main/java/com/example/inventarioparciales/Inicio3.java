@@ -13,7 +13,6 @@ import android.widget.TextView;
 public class Inicio3 extends AppCompatActivity {
 Button btnRegister,btnInvited;
 TextView tvLogin;
-boolean estadoBotones;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +23,13 @@ boolean estadoBotones;
         btnRegister=findViewById(R.id.btnRegister);
         tvLogin = findViewById(R.id.irAlLogIn);
         btnInvited = findViewById(R.id.btnInvited);
-       /* estadoBotones = getIntent().getBooleanExtra("estado_boton", false);*/
 
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Inicio3.this, Login.class);
                 startActivity(i);
+                tvLogin.setEnabled(false);
             }
         });
         // evento de escuchapara registrar
@@ -39,7 +38,7 @@ boolean estadoBotones;
             public void onClick(View view) {
                 Intent i = new Intent(Inicio3.this, Register.class);
                 startActivity(i);
-               /* btnRegister.setEnabled(estadoBotones);*/
+               btnRegister.setEnabled(false);
             }
         });
         btnInvited.setOnClickListener(new View.OnClickListener() {
@@ -49,8 +48,17 @@ boolean estadoBotones;
                 i.putExtra("nombre", "invitado");
                 i.putExtra("correo","invitado@gmail.com");
                 startActivity(i);
+                btnInvited.setEnabled(false);
             }
         });
+
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        btnRegister.setEnabled(true);
+        btnInvited.setEnabled(true);
+        tvLogin.setEnabled(true);
 
     }
 

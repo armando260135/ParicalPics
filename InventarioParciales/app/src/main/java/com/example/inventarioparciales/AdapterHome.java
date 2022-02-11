@@ -2,22 +2,26 @@ package com.example.inventarioparciales;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolderHome> {
-
+    private long ultimoClick= 0;
     ArrayList<MateriasHome> listHome;
     Context context;
+    private View.OnClickListener listener;
     public AdapterHome(ArrayList<MateriasHome> listHome, Context context) {
         this.listHome = listHome;
         this.context = context;
@@ -38,7 +42,11 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolderHome
         String materia = listHome.get(position).getNombre();
 
         holder.itemView.setOnClickListener(view -> {
-            Intent i = new Intent(context,VerSemestres.class);
+            if (SystemClock.elapsedRealtime() - ultimoClick < 1000){
+                return;
+            }
+            ultimoClick= SystemClock.elapsedRealtime();
+            Intent i = new Intent(context, VerSemestres.class);
             i.putExtra("Materia",materia);
             context.startActivity(i);
         });

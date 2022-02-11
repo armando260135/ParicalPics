@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
@@ -108,6 +109,7 @@ public class Home extends AppCompatActivity {
                 iSubirImg.putExtra("nombre_perfil",nombreUsuario);
                 iSubirImg.putExtra("correo_perfil",correo);
                 startActivity(iSubirImg);
+                iconprofile.setEnabled(false);
             }
         });
 
@@ -119,18 +121,6 @@ public class Home extends AppCompatActivity {
         recyclerView.setVisibility(View.VISIBLE);
         gridMaterias.setVisibility(View.VISIBLE);
         llenarMaterias();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        if (network.isOnlineNet())
-//            Log.e("accInternet",   Boolean.toString(network.isOnlineNet()));
-//        else{
-//            progressDialog.dismiss();
-//            toast();
-//            Log.e("accInternet",   Boolean.toString(network.isOnlineNet()));
-//        }
     }
 
     public void toast() {
@@ -183,5 +173,10 @@ public class Home extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "sin ijueadre conexion con la bd" + error, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        iconprofile.setEnabled(true);
     }
 }
