@@ -69,7 +69,6 @@ public class Home extends AppCompatActivity {
     private ProgressBar progressBar;
     String nombreUsuario="";
     String correo = "";
-    Network network = new Network();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +119,16 @@ public class Home extends AppCompatActivity {
         });
         recyclerView.setVisibility(View.VISIBLE);
         gridMaterias.setVisibility(View.VISIBLE);
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+            Log.d("network", " "+networkInfo);
+        } else {
+            toast();
+            Log.d("network", " "+networkInfo);
+        }
         llenarMaterias();
     }
 

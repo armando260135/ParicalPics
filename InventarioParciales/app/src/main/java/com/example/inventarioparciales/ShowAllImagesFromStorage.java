@@ -17,13 +17,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,23 +51,28 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
     private static final short REQUEST_CODE = 6545;
     public static String NAME_FILE = "";
     ProgressBar progressBarImagen;
-    @Override
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_images_from_storage);
         imagelist = new ArrayList<>();
         txtdescargar = findViewById(R.id.txtdescargar);
-        /*recyclerView=findViewById(R.id.recyclerview);*/
-        /*recyclerView.setLayoutManager(new LinearLayoutManager(null));*/
         viewPager2 = findViewById(R.id.viewPagerParciales);
         progressBarImagen = findViewById(R.id.progress_imagenes);
-
-       /* progressBar=findViewById(R.id.progress);*/
-       /* progressBar.setVisibility(View.VISIBLE);*/
-       /* txtsinparciales = findViewById(R.id.txtSinParciales);*/
         materiaSelect = getIntent().getStringExtra("materiaClick");
         examenSelect = getIntent().getStringExtra("examenClick");
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+            Log.d("network", " "+networkInfo);
+        } else {
+            toast();
+            Log.d("network", " "+networkInfo);
+        }
+
         obtenerSemestre(examenSelect);
         consulta();
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -80,6 +89,20 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
             }
         });
     }
+
+    public void toast() {
+        final RelativeLayout relativeLayout = findViewById(R.id.msgAccount);
+        relativeLayout.setVisibility(View.VISIBLE);
+        Button btnEntentido = findViewById(R.id.entendidoMsg);
+
+        relativeLayout.setOnClickListener(v -> {
+            //nothing
+        });
+        btnEntentido.setOnClickListener(v ->{
+            relativeLayout.setVisibility(View.INVISIBLE);
+        });
+    }
+    
     public void consulta(){
 
         String formarruta = "/"+materiaSelect+"/"+rutasemestre;

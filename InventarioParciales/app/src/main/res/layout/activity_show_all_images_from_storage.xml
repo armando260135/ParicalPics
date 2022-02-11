@@ -143,4 +143,9 @@
             />
     </LinearLayout>
 
+    <include
+        android:id="@+id/msgAccount"
+        layout="@layout/msg_internet"
+        android:visibility="gone"/>
+
 </FrameLayout>
