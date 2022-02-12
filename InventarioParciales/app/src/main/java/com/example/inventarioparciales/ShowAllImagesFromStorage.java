@@ -6,10 +6,7 @@ import static com.example.inventarioparciales.VerSemestres.rutasemestre;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
-
 import android.Manifest;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
@@ -30,8 +27,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
@@ -145,7 +140,7 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
         if (isDownloadManagerAvailable()) {
             checkSelfPermission();
         } else {
-            Toast.makeText(this, "Download manager is not available", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.toast_not_avalible), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -182,7 +177,7 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
                     executeDownload(imagelist);
                 } else {
                     // permission denied!
-                    Toast.makeText(this, "Please give permissions ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getResources().getString(R.string.toast_permission), Toast.LENGTH_LONG).show();
                 }
                 return;
             }
@@ -215,7 +210,7 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if(DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)){
-                Toast.makeText(context,"Descarga Exitosa", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, getResources().getString(R.string.toast_dowloand_succesful), Toast.LENGTH_LONG).show();
                 // DO SOMETHING WITH THIS FILE
             }
         }

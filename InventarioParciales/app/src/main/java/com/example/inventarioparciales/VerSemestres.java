@@ -4,12 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,12 +48,12 @@ public class VerSemestres extends AppCompatActivity {
 
     public void init(){
         elementSemestres = new ArrayList<>();
-        elementSemestres.add(new ListElementSemestre("Semestre 2022-1",materia,"Ver"));
-        elementSemestres.add(new ListElementSemestre("Semestre 2022-2",materia,"Ver"));
-        elementSemestres.add(new ListElementSemestre("Semestre 2021-1",materia,"Ver"));
-        elementSemestres.add(new ListElementSemestre("Semestre 2021-2",materia,"Ver"));
-        elementSemestres.add(new ListElementSemestre("Semestre 2020-1",materia,"Ver"));
-        elementSemestres.add(new ListElementSemestre("Semestre 2020-2",materia,"Ver"));
+        elementSemestres.add(new ListElementSemestre(getResources().getString(R.string.txt_semestre20221),materia,getResources().getString(R.string.txt_Ver)));
+        elementSemestres.add(new ListElementSemestre(getResources().getString(R.string.txt_semestre20222),materia,getResources().getString(R.string.txt_Ver)));
+        elementSemestres.add(new ListElementSemestre(getResources().getString(R.string.txt_semestre20211),materia,getResources().getString(R.string.txt_Ver)));
+        elementSemestres.add(new ListElementSemestre(getResources().getString(R.string.txt_semestre20212),materia,getResources().getString(R.string.txt_Ver)));
+        elementSemestres.add(new ListElementSemestre(getResources().getString(R.string.txt_semestre20201),materia,getResources().getString(R.string.txt_Ver)));
+        elementSemestres.add(new ListElementSemestre(getResources().getString(R.string.txt_semestre20202),materia,getResources().getString(R.string.txt_Ver)));
 
         AdapterListSemestre adapterListSemestre = new AdapterListSemestre(elementSemestres,this, materia,TYPE_EXAMEN);
         RecyclerView recyclerView = findViewById(R.id.recyclerSemestre);

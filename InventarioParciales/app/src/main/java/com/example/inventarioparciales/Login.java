@@ -4,16 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.app.SharedElementCallback;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,14 +56,14 @@ public class Login extends AppCompatActivity {
         String password = etPassword.getText().toString(); //contraseña
 
         if (TextUtils.isEmpty(mail)) {
-            etUsername.setError("Ingrese un correo");
+            etUsername.setError(getResources().getString(R.string.etx_correo));
             etUsername.requestFocus();
         } else if (TextUtils.isEmpty(password)) {
-            etPassword.setError("Ingrese una contraseña");
+            etPassword.setError(getResources().getString(R.string.etx_contrasena));
             etPassword.requestFocus();
         } else {
-            progressDialogLoginUser.setTitle("Iniciando Sesión");
-            progressDialogLoginUser.setMessage("Por Favor Espere un Momento");
+            progressDialogLoginUser.setTitle(getResources().getString(R.string.txt_progress_title));
+            progressDialogLoginUser.setMessage(getResources().getString(R.string.txt_progress_msg));
             progressDialogLoginUser.setCancelable(false);
             progressDialogLoginUser.show();
 
@@ -79,7 +76,7 @@ public class Login extends AppCompatActivity {
                     } else {
                         progressDialogLoginUser.dismiss();
                         Log.w("TAG", "signInWithEmail:failure", task.getException());
-                        Toast.makeText(Login.this, "Credenciales Incorrectas",
+                        Toast.makeText(Login.this, getResources().getString(R.string.login_faiured),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }

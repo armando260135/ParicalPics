@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:gravity="center"
-        android:text="WELCOME"
+        android:text="@string/mensaje_inicio"
         android:textColor="@color/white"
         android:textSize="28dp"
         app:layout_constraintTop_toBottomOf="@+id/logoImageView"
@@ -76,7 +76,7 @@
                 android:drawablePadding="4dp"
                 android:gravity="center|left"
                 android:paddingStart="50dp"
-                android:text="Invitado"
+                android:text="@string/btn_invitado"
                 android:textColor="@color/black"/>
 
             <Button
@@ -92,7 +92,7 @@
                 android:gravity="center|left"
                 android:paddingStart="30dp"
                 android:drawablePadding="10dp"
-                android:text="Registrarse"
+                android:text="@string/btn_registrarse"
                 android:textColor="@color/black"/>
         </LinearLayout>
 
@@ -106,7 +106,7 @@
                 android:id="@+id/textView4"
                 android:layout_width="193dp"
                 android:layout_height="25dp"
-                android:text="Tienes una cuenta creada "
+                android:text="@string/txt_cuenta_creada"
                 android:textColor="@color/white"
                 android:layout_weight="1"
                 android:gravity="right"
