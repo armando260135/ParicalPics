@@ -145,6 +145,8 @@ public class Home extends AppCompatActivity {
         });
     }
 
+
+    
     private void llenarMaterias() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         reference.child("Asignaturas").addValueEventListener(new ValueEventListener() {
