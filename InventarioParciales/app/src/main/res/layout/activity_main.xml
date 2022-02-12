@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="20dp"
-        android:text="ParcialPics"
+        android:text="@string/nombre_splash"
         android:textColor="#fc364e"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"

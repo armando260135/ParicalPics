@@ -11,8 +11,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -65,20 +63,20 @@ public class Register extends AppCompatActivity {
         String phone = etTelephone.getText().toString();
 
         if (TextUtils.isEmpty(name)){
-            etUsername.setError("Ingrese un nombre");
+            etUsername.setError(getResources().getString(R.string.etx_usuario_error));
             etUsername.requestFocus();
         }else if (TextUtils.isEmpty(password)){
-            etPassword.setError("Ingrese una contraseña");
+            etPassword.setError(getResources().getString(R.string.etx_contrasena));
             etPassword.requestFocus();
         }else if (TextUtils.isEmpty(mail)){
-            etEmail.setError("Ingrese un correo");
+            etEmail.setError(getResources().getString(R.string.etx_correo));
             etEmail.requestFocus();
         }else if (TextUtils.isEmpty(phone)){
-            etTelephone.setError("Ingrese un telefono");
+            etTelephone.setError(getResources().getString(R.string.etx_phone_error));
             etTelephone.requestFocus();
         }else {
-            progressDialogRegisterUser.setTitle("Registrando Usuario");
-            progressDialogRegisterUser.setMessage("Por Favor Espere un Momento");
+            progressDialogRegisterUser.setTitle(getResources().getString(R.string.txt_progress_title_register));
+            progressDialogRegisterUser.setMessage(getResources().getString(R.string.txt_progress_msg));
             progressDialogRegisterUser.setCancelable(false);
             progressDialogRegisterUser.show();
             mAuth.createUserWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -101,11 +99,11 @@ public class Register extends AppCompatActivity {
                                 progressDialogRegisterUser.dismiss();
                             }
                         });
-                        Toast.makeText(Register.this, "Usuario registrado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register.this, R.string.toast_register_succesful, Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Register.this,Login.class));
                     }else{
                         progressDialogRegisterUser.dismiss();
-                        Toast.makeText(Register.this, "Usuario no registrado: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register.this, getResources().getString(R.string.toast_register_failtured) + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/carrera"
                 android:drawablePadding="4dp"
-                android:text="ING sistemas"
+                android:text="@string/txt_carrier"
                 android:textColor="@color/white"
                 android:fontFamily="@font/typo_round_bold_demo"/>
         </LinearLayout>
