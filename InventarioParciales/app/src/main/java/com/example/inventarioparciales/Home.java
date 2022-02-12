@@ -70,6 +70,8 @@ public class Home extends AppCompatActivity {
     String nombreUsuario="";
     String correo = "";
 //basicaly
+
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
