@@ -69,7 +69,7 @@ public class Home extends AppCompatActivity {
     private ProgressBar progressBar;
     String nombreUsuario="";
     String correo = "";
-
+//basicaly
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
