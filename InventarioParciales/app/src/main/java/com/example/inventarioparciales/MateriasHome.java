@@ -3,14 +3,24 @@ package com.example.inventarioparciales;
 public class MateriasHome {
 
     private String nombre;
-
     private int foto;
+    private String codigo;
+    public MateriasHome(){}
 
-    public MateriasHome(String nombre, int foto) {
-        this.nombre = nombre;
-
-        this.foto = foto;
+    public String getCodigo() {
+        return codigo;
     }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public MateriasHome(String nombre, int foto, String codigo) {
+        this.nombre = nombre;
+        this.foto = foto;
+        this.codigo = codigo;
+    }
+
 
     public String getNombre() {
         return nombre;
