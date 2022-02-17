@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -11,22 +12,19 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
-
-import java.util.Locale;
 
 public class Login extends AppCompatActivity {
     EditText etUsername, etPassword;
@@ -35,6 +33,8 @@ public class Login extends AppCompatActivity {
     private Button btnLogin;
     private ProgressDialog progressDialogLoginUser;
     String userPreferences, passwordPreferences;
+    public static Boolean flagnetworkfailtured = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +49,16 @@ public class Login extends AppCompatActivity {
         progressDialogLoginUser = new ProgressDialog(this);
         uploadCredentials();
         btnLogin.setOnClickListener(view -> {
+            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isConnected()) {
+                Log.d("network", " "+networkInfo);
+                flagnetworkfailtured = true;
+            } else {
+                toast();
+                flagnetworkfailtured = false;
+                Log.d("network", " "+networkInfo);
+            }
             userLogin();
         });
 
@@ -71,22 +81,27 @@ public class Login extends AppCompatActivity {
             progressDialogLoginUser.setCancelable(false);
             progressDialogLoginUser.show();
 
-            mAuth.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        queryDatabases(mail);
-                        saveCredentialsForUsers();
-                    } else {
-                        progressDialogLoginUser.dismiss();
-                        Log.w("TAG", "signInWithEmail:failure", task.getException());
-                        Toast.makeText(Login.this, getResources().getString(R.string.login_faiured),
-                                Toast.LENGTH_SHORT).show();
+            if (flagnetworkfailtured){
+                mAuth.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            queryDatabases(mail);
+                            saveCredentialsForUsers();
+                        } else {
+                            progressDialogLoginUser.dismiss();
+                            Log.w("TAG", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(Login.this, getResources().getString(R.string.login_faiured),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-            });
+                });
+            }else {
+                progressDialogLoginUser.dismiss();
+            }
         }
     }
+
     public void queryDatabases(String mail){
        db.collection("users").whereEqualTo("Correo",mail)
                .get()
@@ -112,6 +127,20 @@ public class Login extends AppCompatActivity {
        });
 
     }
+
+    public void toast() {
+        final RelativeLayout relativeLayout = findViewById(R.id.msgAccount);
+        relativeLayout.setVisibility(View.VISIBLE);
+        Button btnEntentido = findViewById(R.id.entendidoMsg);
+
+        relativeLayout.setOnClickListener(v -> {
+            //nothing
+        });
+        btnEntentido.setOnClickListener(v ->{
+            relativeLayout.setVisibility(View.INVISIBLE);
+        });
+    }
+
     public void saveCredentialsForUsers(){
         SharedPreferences preferences = getSharedPreferences("credentials", this.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
