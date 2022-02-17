@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,6 +25,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
+
+import java.util.Locale;
 
 public class Login extends AppCompatActivity {
     EditText etUsername, etPassword;
@@ -52,7 +56,7 @@ public class Login extends AppCompatActivity {
 
     //logueo para usuarios con firebase
     public void userLogin() {
-        String mail = etUsername.getText().toString(); //correo
+        String mail = etUsername.getText().toString().toLowerCase(); //correo
         String password = etPassword.getText().toString(); //contraseña
 
         if (TextUtils.isEmpty(mail)) {
@@ -84,7 +88,6 @@ public class Login extends AppCompatActivity {
         }
     }
     public void queryDatabases(String mail){
-        long tiempoI = System.currentTimeMillis();
        db.collection("users").whereEqualTo("Correo",mail)
                .get()
                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -92,16 +95,17 @@ public class Login extends AppCompatActivity {
            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                String nombre = "";
                String correo = "";
+               String telefono = "";
                for(QueryDocumentSnapshot doc : queryDocumentSnapshots){
                    nombre = doc.getString("Nombre");
                    correo = doc.getString("Correo");
+                   telefono = doc.getString("Telefono");
                }
-               Intent intent = new Intent(Login.this, Home .class);
+               Intent intent = new Intent(Login.this, Home.class);
                intent.putExtra("nombre", nombre);
                intent.putExtra("correo", correo);
+               intent.putExtra("telefono", telefono);
                startActivity(intent);
-               long tiempoF = System.currentTimeMillis();
-               System.out.println("time->:"+(tiempoF-tiempoI));
                progressDialogLoginUser.dismiss();
            }
 
