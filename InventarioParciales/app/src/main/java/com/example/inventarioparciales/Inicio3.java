@@ -49,6 +49,7 @@ TextView tvLogin;
                 Intent i = new Intent(Inicio3.this, Home.class);
                 i.putExtra("nombre", "invitado");
                 i.putExtra("correo","invitado@gmail.com");
+                i.putExtra("telefono","1234567891");
                 startActivity(i);
                 btnInvited.setEnabled(false);
             }

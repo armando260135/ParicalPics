@@ -42,6 +42,7 @@ public class Home extends AppCompatActivity {
     private ProgressBar progressBar;
     String nombreUsuario="";
     String correo = "";
+    String telefono = "";
 //basicaly
 
     
@@ -74,6 +75,7 @@ public class Home extends AppCompatActivity {
         });
         correo = getIntent().getStringExtra("correo");
         nombreUsuario = getIntent().getStringExtra("nombre").toUpperCase();
+        telefono = getIntent().getStringExtra("telefono");
         tvusername.setText(nombreUsuario);
 
         iconprofile.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +84,7 @@ public class Home extends AppCompatActivity {
                 Intent iSubirImg = new Intent(Home.this, Perfil.class);
                 iSubirImg.putExtra("nombre_perfil",nombreUsuario);
                 iSubirImg.putExtra("correo_perfil",correo);
+                iSubirImg.putExtra("telefono_perfil", telefono);
                 startActivity(iSubirImg);
                 iconprofile.setEnabled(false);
             }

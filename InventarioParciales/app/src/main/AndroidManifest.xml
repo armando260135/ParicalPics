@@ -19,6 +19,10 @@
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".MyAccount"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".VerSemestres"
             android:exported="false"
             android:screenOrientation="portrait"/>
