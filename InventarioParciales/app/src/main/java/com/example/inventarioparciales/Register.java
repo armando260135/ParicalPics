@@ -100,7 +100,9 @@ public class Register extends AppCompatActivity {
                             }
                         });
                         Toast.makeText(Register.this, R.string.toast_register_succesful, Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Register.this,Login.class));
+                        Intent i = new Intent(Register.this, Login.class);
+                        i.putExtra("isRegister", true);
+                        startActivity(i);
                     }else{
                         progressDialogRegisterUser.dismiss();
                         Toast.makeText(Register.this, getResources().getString(R.string.toast_register_failtured) + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -113,8 +115,8 @@ public class Register extends AppCompatActivity {
     /*@Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(Register.this,Inicio3.class);
-        i.putExtra("estado_boton", true);
-    }*/
+       finish();
+    }
+*/
 }
 

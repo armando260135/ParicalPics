@@ -43,6 +43,7 @@ public class Home extends AppCompatActivity {
     String nombreUsuario="";
     String correo = "";
     String telefono = "";
+    private int iddrawable;
 //basicaly
 
     
@@ -139,9 +140,10 @@ public class Home extends AppCompatActivity {
                             recyclerView.setVisibility(View.VISIBLE);
                             gridMaterias.setVisibility(View.VISIBLE);
                             String nombre = sn.child("nombre").getValue().toString();
-                            int icon = Integer.parseInt(sn.child("foto").getValue().toString());
+                            //int icon = Integer.parseInt(sn.child("foto").getValue().toString());
+                            iddrawable = getResources().getIdentifier(sn.child("foto").getValue().toString(), "raw", getPackageName());
                             String codigo = sn.child("codigo").getValue().toString();
-                            listHome.add(new MateriasHome(nombre, icon, codigo));
+                            listHome.add(new MateriasHome(nombre, iddrawable, codigo));
                             AdapterHome adapterHome = new AdapterHome(listHome, Home.this);
                             recyclerView.setAdapter(adapterHome);
                             progressBar.setVisibility(View.GONE);

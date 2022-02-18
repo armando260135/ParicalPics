@@ -34,6 +34,7 @@ public class Login extends AppCompatActivity {
     private ProgressDialog progressDialogLoginUser;
     String userPreferences, passwordPreferences;
     public static Boolean flagnetworkfailtured = true;
+    private boolean isRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,11 @@ public class Login extends AppCompatActivity {
         userPreferences = "";
         passwordPreferences = "";
         progressDialogLoginUser = new ProgressDialog(this);
-        uploadCredentials();
+        isRegister = getIntent().getBooleanExtra("isRegister",false);
+
+        if(!isRegister)
+            uploadCredentials();
+
         btnLogin.setOnClickListener(view -> {
             ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -103,6 +108,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void queryDatabases(String mail){
+
        db.collection("users").whereEqualTo("Correo",mail)
                .get()
                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -143,10 +149,16 @@ public class Login extends AppCompatActivity {
 
     public void saveCredentialsForUsers(){
         SharedPreferences preferences = getSharedPreferences("credentials", this.MODE_PRIVATE);
+        if(preferences != null){
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("nombreUser", etUsername.getText().toString());
         editor.putString("passwordUser", etPassword.getText().toString());
-        editor.commit();
+        editor.apply();
+        }else{
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("nombreUser", etUsername.getText().toString());
+            editor.putString("passwordUser", etPassword.getText().toString());
+        }
 
     }
     public void uploadCredentials(){
