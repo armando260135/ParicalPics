@@ -1,3 +1,70 @@
 <resources>
     <string name="app_name">AG</string>
+    <string name="login"><u>LOG IN</u></string>
+    <string name="login_normal">LOG IN</string>
+
+<!--  splash  -->
+    <string name="nombre_splash">ParcialPics</string>
+
+<!--  inicio3  -->
+    <string name="mensaje_inicio">BIENVENIDO!</string>
+    <string name="btn_invitado">INVITADO</string>
+    <string name="btn_registrarse">REGISTRARSE</string>
+    <string name="txt_cuenta_creada">Tienes una cuenta creada? </string>
+
+<!-- Login   -->
+    <string name="etx_login">Correo Electronico</string>
+    <string name="etx_login_password">Password</string>
+    <string name="txt_login">Iniciar Sesion</string>
+    <string name="etx_correo">Ingrese un correo</string>
+    <string name="etx_contrasena">Ingrese una contraseña</string>
+    <string name="txt_progress_title">Iniciando Sesion</string>
+    <string name="txt_progress_msg">Por Favor Espere un Momento</string>
+    <string name="login_faiured">Credenciales Incorrectas</string>
+
+<!--  Register  -->
+    <string name="txt_register">Registrar Cuenta</string>
+    <string name="etx_user">Usuario</string>
+    <string name="etx_email">Correo electronico</string>
+    <string name="etx_phone">Telefono</string>
+    <string name="etx_usuario_error">Ingrese un nombre</string>
+    <string name="etx_phone_error">Ingrese un telefono</string>
+    <string name="txt_progress_title_register">Registrando Usuario</string>
+    <string name="toast_register_succesful">Usuario registrado</string>
+    <string name="toast_register_failtured">Usuario No registrado </string>
+
+<!--   Home   -->
+    <string name="txt_carrier">ING Sistemas</string>
+    <string name="materias">Materias</string>
+    <string name="welcome">Bienvenidos a ParcialPics</string>
+    <string name="toast_faitured_BD">Sin conexion a la BD </string>
+
+<!--   Ver semestres   -->
+    <string name="txt_parcial">Ultimos Parciales</string>
+    <string name="txt_parcial1">Parcial 1</string>
+    <string name="txt_parcial2">Parcial 2</string>
+    <string name="txt_examen">Examen</string>
+    <string name="txt_semestre20201">Semestre 2020-1</string>
+    <string name="txt_semestre20202">Semestre 2020-2</string>
+    <string name="txt_semestre20211">Semestre 2021-1</string>
+    <string name="txt_semestre20212">Semestre 2021-2</string>
+    <string name="txt_semestre20221">Semestre 2022-1</string>
+    <string name="txt_semestre20222">Semestre 2022-2</string>
+    <string name="txt_Ver">Ver</string>
+
+<!--  Mostrar Imagenes  -->
+    <string name="txt_preview_image">Examen</string>
+    <string name="txt_dowland">DESCARGAR</string>
+    <string name="toast_permission">Por Favor Ortoga Permisos</string>
+    <string name="toast_dowloand_succesful">Descarga Exitosa</string>
+    <string name="toast_not_avalible">El administrador de descargas no está disponible</string>
+
+
+
+
+
+
+
+
+
 </resources>

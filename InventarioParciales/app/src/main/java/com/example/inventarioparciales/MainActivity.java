@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
+    Screen screen ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,4 +46,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 3000);
     }
+
+
+    /*@Override
+    public void onBackPressed() {
+        //nothing for back
+    }*/
+
 }

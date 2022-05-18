@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="20dp"
-        android:text="ParcialPics"
+        android:text="@string/nombre_splash"
         android:textColor="#fc364e"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoImageView"
-        app:layout_constraintVertical_bias="0.781" />
+        app:layout_constraintVertical_bias="0.781"
+        android:fontFamily="@font/typo_round_bold_demo"/>
 
 
 
