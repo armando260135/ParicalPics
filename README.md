@@ -4,7 +4,7 @@ Aplicacion para el uso estudiantil, la cual consiste en un banco de parciales, d
 En esta aplicacion es solo para uso formativo, la cual para acceso como tal a la misma, se deben conceder credenciales de acceso a la BD. 
 
 Para la administracion de la aplicacion como: agregar parciales, agregar usuarios, agregar materias y demas funcionales se debe contar con la siguiente aplicacion
-Admin parcialpics link: 
+Admin parcialpics link: https://github.com/armando260135/AdminParcialPics.git
 
 anexo fotos de la apk 
 
